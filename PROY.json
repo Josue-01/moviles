@@ -1,0 +1,94 @@
+{
+  "uuid": "1d98b642-456a-4829-a73d-f977d2506be6",
+  "lastMigration": 33,
+  "name": "RecipeBook",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 12346,
+  "hostname": "0.0.0.0",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "c5bb4306-8dde-4ff5-9629-781d0f2663db",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "recipes",
+      "responses": [
+        {
+          "uuid": "011344da-b93d-4385-850c-502e4ac7cabb",
+          "body": "{\r\n  \"recipes\": [\r\n    {\r\n      \"name\": \"Lasagna\",\r\n      \"chef\": \"Josue J\",\r\n      \"description\": \"Deliciosa lasagna con carne molida, queso y salsa de tomate.\",\r\n      \"image\": \"https://www.recetasdesbieta.com/wp-content/uploads/2018/10/lasagna-original..jpg\"\r\n    },\r\n    {\r\n      \"name\": \"Tacos al Pastor\",\r\n      \"chef\": \"Carlos M\",\r\n      \"description\": \"Tacos mexicanos con carne de cerdo marinada y piña.\",\r\n      \"image\": \"https://iamafoodblog.b-cdn.net/wp-content/uploads/2021/05/al-pastor-3507w-1024x683.jpg\"\r\n    },\r\n    {\r\n      \"name\": \"Sushi Roll\",\r\n      \"chef\": \"Akira T\",\r\n      \"description\": \"Sushi de salmón, aguacate y queso crema envuelto en alga nori.\",\r\n      \"image\": \"https://www.kikkoman.eu/fileadmin/_processed_/0/f/csm_1025-recipe-page-Spicy-tuna-and-salmon-rolls_desktop_b6172c0072.jpg\"\r\n    },\r\n    {\r\n      \"name\": \"Pizza Margarita\",\r\n      \"chef\": \"Luca R\",\r\n      \"description\": \"Pizza italiana con tomate, mozzarella y albahaca fresca.\",\r\n      \"image\": \"https://www.paulinacocina.net/wp-content/uploads/2023/09/pizza-margherita-paulina-cocina-recetas-1200x900.jpg\"\r\n    },\r\n    {\r\n      \"name\": \"Hamburguesa Clásica\",\r\n      \"chef\": \"Emily S\",\r\n      \"description\": \"Hamburguesa con carne de res, lechuga, tomate y queso cheddar.\",\r\n      \"image\": \"https://assets.unileversolutions.com/recipes-v2/218401.jpg\"\r\n    },\r\n    {\r\n      \"name\": \"Ceviche de Camarón\",\r\n      \"chef\": \"Pedro L\",\r\n      \"description\": \"Ceviche fresco con camarón, limón, cebolla y cilantro.\",\r\n      \"image\": \"https://i0.wp.com/recetaskwa.com/wp-content/uploads/2023/09/ceviche_camaron.jpg?resize=1200%2C1080&ssl=1\"\r\n    }\r\n  ]\r\n}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "c5bb4306-8dde-4ff5-9629-781d0f2663db"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
