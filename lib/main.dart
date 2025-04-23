@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyect_recetas_comidas/providers/recipes_provider.dart';
-
 import 'package:proyect_recetas_comidas/screens/home_screen.dart';
+import  'package:proyect_recetas_comidas/screens/favorites_recipes.dart';
 
 // funcion que permite dar inicio a la app
 void main() => runApp(const MyApp());
@@ -47,7 +47,7 @@ class RecibeBok extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 21, 7, 145),
           title: Text(
-            'Libro de Recetas',
+            'Comidas tipicas de Tiquicia🍽️',
             style: TextStyle(color: Colors.white),
           ),
           bottom: TabBar(
@@ -56,12 +56,13 @@ class RecibeBok extends StatelessWidget {
             unselectedLabelColor: Colors.white,
             tabs:[
             Tab(icon: Icon(Icons.home), text: 'Home',),
+            Tab(icon: Icon(Icons.favorite), text: 'Favoritos',)
             // Tab(icon: Icon(Icons.settings), text: 'Ajustes',)
           ]),
         ),
         ///TabBarView permitira navergar dependiendo de las tabs que tengamos
-        body: TabBarView(children: [
-          HomeScreen(),])),
+        body: const TabBarView(children: [
+          HomeScreen(),Favorites_Recipes() ])),
     );
   }
 }

@@ -7,6 +7,7 @@
    //variable de carga
    bool isLoading = false;// va a indicar si la carga es verdadera o falsa
    List<Recipe> recipes = [];
+   List<Recipe> favoriteRecipe = [];
 
     Future<void> FetchRecipes() async{
      //var carga
@@ -33,5 +34,31 @@
      notifyListeners(); //notifica a los widgets que dependen de este provider que el estado ha cambiado
     }
 
+  }
+  //funcion para agregar y eliminar favoritos
+  Future<void> toggleFavorite(Recipe recipe) async {
+    final isFavorite = favoriteRecipe.contains(recipe);
+
+    try{
+        final url = Uri.parse('http://10.0.2.2:12346/favorites');
+        final response = isFavorite ? 
+        await http.delete(url, body: json.encode({"id": recipe.id}))
+        :await http.post(url, body: json.encode(recipe.toJson()));
+        ; //eliminar receta de favoritos
+      if (response.statusCode == 200){
+       if (isFavorite){
+        favoriteRecipe.remove(recipe); //eliminar receta de favoritos
+       }else{
+        favoriteRecipe.add(recipe); //agregar receta a favoritos
+       }
+       notifyListeners();
+      }else{
+        throw Exception('Error al agregar o eliminar favorito: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error al agregar o eliminar favorito: $e');
+    } finally {
+      notifyListeners(); // notifica a los widgets que dependen de este provider que el estado ha cambiado
+    }
   }
 }
