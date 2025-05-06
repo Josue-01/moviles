@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
     return GestureDetector(//SE AGREGGO EL WIDGET PARA AGREGAR EL ONTAP EL CUAL VA A REDIRIGIR A LA PANTALLA DE DETALLE
       onTap:(){
         //Navigator.push abre una nueva pantalla
-        Navigator.push(context,MaterialPageRoute(builder: (context) => RecipeDetail(recipesData: recipe.name)));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => RecipeDetail(recipesData: recipe)));
       } ,
       child: Padding(
         //el pading con el all aplica en todos lados, pero cuando se quiere aplicar en un solo lado se usa el only()

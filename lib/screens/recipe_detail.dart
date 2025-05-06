@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyect_recetas_comidas/models/recipe_model.dart';
 import 'package:proyect_recetas_comidas/providers/recipes_provider.dart';
-
 class RecipeDetail extends StatefulWidget {
   final Recipe recipesData; // Recibimos la receta que seleccionamos
   //constructor
@@ -31,7 +30,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text(widget.recipesData.name),
+        title:Text(widget.recipesData.name, style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.blueAccent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
@@ -51,6 +50,17 @@ class _RecipeDetailState extends State<RecipeDetail> {
           icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),),
         ],//icono que permite regresar a la pantalla anterior
       ),
+      body: Padding(padding: EdgeInsets.all(18), 
+      child: Column(children: [
+        Image.network(widget.recipesData.image), //imagen de la receta
+        Text(widget.recipesData.name), //nombre del chef
+        SizedBox(height: 8,), //espacio entre los widgets
+        Text("by ${widget.recipesData.name}"), //nombre de la receta), 
+        SizedBox(height: 8,), //espacio entre los widgets
+        Text('Recipes steps'),
+        for (var Step  in widget.recipesData.recipeSteps) Text("- $Step"),
+
+      ],)),
     );
   }
 }

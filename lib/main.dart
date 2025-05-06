@@ -59,10 +59,10 @@ class RecibeBok extends StatelessWidget {
             Tab(icon: Icon(Icons.favorite), text: 'Favoritos',)
             // Tab(icon: Icon(Icons.settings), text: 'Ajustes',)
           ]),
-        ),
+        ), 
         ///TabBarView permitira navergar dependiendo de las tabs que tengamos
         body: const TabBarView(children: [
-          HomeScreen(),Favorites_Recipes() ])),
+          HomeScreen(),FavoritesRecipes() ])),
     );
   }
 }
