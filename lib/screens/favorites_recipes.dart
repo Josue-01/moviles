@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyect_recetas_comidas/providers/recipes_provider.dart';
@@ -19,8 +21,8 @@ class FavoritesRecipes extends StatelessWidget{
           : ListView.builder(
             itemCount: favoritesRecipes.length, // numero de recetas favoritas  
             itemBuilder: (context, index){
-              final recipe = favoritesRecipes[index]; // Obtiene la receta favorita
-              favoriteRecipesCard(recipe: favoritesRecipes[index]); // Muestra la receta favorita
+              final recipe = favoritesRecipes[index]; // O btiene la receta favorita
+              return favoriteRecipesCard(recipe: favoritesRecipes[index]); // Muestra la receta favorita
             }
           );
         },  

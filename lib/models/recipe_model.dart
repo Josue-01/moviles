@@ -13,7 +13,7 @@ class Recipe {
     required this.chef,
     required this.description,
     required this.image,
-    required this.recipeSteps,
+   required this.recipeSteps,
   });
 
 
@@ -25,7 +25,7 @@ class Recipe {
       chef: json['chef'],
       description: json['description'],
       image: json['image'],
-       recipeSteps: List<String>.from(json['recipe']),
+    recipeSteps: List<String>.from(json['recipe']),
     );
   }
   //conversion  a json]
@@ -36,7 +36,7 @@ class Recipe {
       'chef': chef,
       'description': description,
       'image': image,
-        'recipe': recipeSteps,
+      'recipe': recipeSteps,
     };
   } 
 
