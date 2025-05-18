@@ -258,3 +258,242 @@ class RecipeForm extends StatelessWidget {
     );
   }
 }
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'package:proyect_recetas_comidas/providers/recipes_provider.dart';
+// import 'package:proyect_recetas_comidas/screens/recipe_detail.dart';
+
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> {
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     // Llamamos FetchRecipes una sola vez cuando se crea el widget
+//     final recipesProvider = Provider.of<RecipesProvider>(context, listen: false);
+//     recipesProvider.FetchRecipes();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Consumer<RecipesProvider>(
+//         builder: (context, provider, child) {
+//           if (provider.isLoading) {
+//             return const Center(child: CircularProgressIndicator());
+//           } else if (provider.recipes.isEmpty) {
+//             return const Center(child: Text('No se encontraron recetas'));
+//           } else {
+//             return ListView.builder(
+//               itemCount: provider.recipes.length,
+//               itemBuilder: (context, index) {
+//                 return _RecipesCard(context, provider.recipes[index]);
+//               },
+//             );
+//           }
+//         },
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         backgroundColor: Colors.orange,
+//         child: const Icon(Icons.add, color: Colors.white),
+//         onPressed: () => _showBottom(context),
+//       ),
+//     );
+//   }
+
+//   Future<void> _showBottom(BuildContext context) {
+//     return showModalBottomSheet(
+//       context: context,
+//       builder: (context) => Container(
+//         width: MediaQuery.of(context).size.width,
+//         height: 500,
+//         color: Colors.white,
+//         child: const RecipeForm(),
+//       ),
+//     );
+//   }
+
+//   Widget _RecipesCard(BuildContext context, dynamic recipe) {
+//     return GestureDetector(
+//       onTap: () {
+//         Navigator.push(
+//           context,
+//           MaterialPageRoute(builder: (context) => RecipeDetail(recipesData: recipe)),
+//         );
+//       },
+//       child: Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: Container(
+//           width: MediaQuery.of(context).size.width,
+//           height: 125,
+//           child: Card(
+//             child: Row(
+//               children: <Widget>[
+//                 Container(
+//                   height: 125,
+//                   width: 100,
+//                   child: ClipRRect(
+//                     borderRadius: BorderRadius.circular(12),
+//                     child: Image.network(
+//                       recipe.image,
+//                       fit: BoxFit.cover,
+//                     ),
+//                   ),
+//                 ),
+//                 const SizedBox(width: 26),
+//                 Column(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: <Widget>[
+//                     Text(
+//                       recipe.name,
+//                       style: const TextStyle(fontSize: 20, fontFamily: 'Quicksand'),
+//                     ),
+//                     const SizedBox(height: 4),
+//                     Container(height: 2, width: 75, color: Colors.orange),
+//                     Text(
+//                       'By ${recipe.chef}',
+//                       style: const TextStyle(fontSize: 20, fontFamily: 'Quicksand'),
+//                     ),
+//                     const SizedBox(height: 4),
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// // El RecipeForm lo dejé tal cual, solo agregué el "const" para mejor rendimiento
+// class RecipeForm extends StatelessWidget {
+//   const RecipeForm({super.key});
+  
+//   @override
+//   Widget build(BuildContext context) {
+//     final _formKey = GlobalKey<FormState>();
+
+//     final TextEditingController _nombreDeLaReceta = TextEditingController();
+//     final TextEditingController _DescripcionDeLaReceta = TextEditingController();
+//     final TextEditingController _chef = TextEditingController();
+//     final TextEditingController _imagenDeLareceta = TextEditingController();
+
+//     return Padding(
+//       padding: const EdgeInsets.all(20),
+//       child: Form(
+//         key: _formKey,
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             const Text(
+//               '🥗Agrega una nueva receta🥗',
+//               style: TextStyle(color: Colors.blueAccent, fontSize: 24),
+//             ),
+//             const SizedBox(height: 16),
+//             _buildTextField(
+//               controler: _nombreDeLaReceta,
+//               label: 'Nombre de la receta',
+//               validator: (value) {
+//                 if (value == null || value.isEmpty) {
+//                   return 'Por favor ingrese un nombre';
+//                 }
+//                 return null;
+//               },
+//             ),
+//             const SizedBox(height: 16),
+//             _buildTextField(
+//               maxLines: 2,
+//               controler: _DescripcionDeLaReceta,
+//               label: 'Descripcion de la receta',
+//               validator: (value) {
+//                 if (value == null || value.isEmpty) {
+//                   return 'Por favor ingrese la descripción';
+//                 }
+//                 return null;
+//               },
+//             ),
+//             const SizedBox(height: 16),
+//             _buildTextField(
+//               controler: _chef,
+//               label: 'Chef',
+//               validator: (value) {
+//                 if (value == null || value.isEmpty) {
+//                   return 'Por favor ingrese el Chef';
+//                 }
+//                 return null;
+//               },
+//             ),
+//             const SizedBox(height: 16),
+//             _buildTextField(
+//               controler: _imagenDeLareceta,
+//               label: 'Imagen de la receta',
+//               validator: (value) {
+//                 if (value == null || value.isEmpty) {
+//                   return 'Por favor ingrese la imagen';
+//                 }
+//                 return null;
+//               },
+//             ),
+//             const SizedBox(height: 16),
+//             Center(
+//               child: ElevatedButton(
+//                 onPressed: () {
+//                   if (_formKey.currentState!.validate()) {
+//                     Navigator.pop(context);
+//                   }
+//                 },
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.blueAccent,
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                 ),
+//                 child: const Text(
+//                   'Save Recipe',
+//                   style: TextStyle(
+//                     color: Colors.white,
+//                     fontSize: 16,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildTextField({
+//     required String label,
+//     required TextEditingController controler,
+//     required String? Function(String?) validator,
+//     int maxLines = 1,
+//   }) {
+//     return TextFormField(
+//       decoration: InputDecoration(
+//         labelText: label,
+//         labelStyle: const TextStyle(fontFamily: 'Quicksand', color: Colors.black),
+//         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+//         focusedBorder: OutlineInputBorder(
+//           borderSide: const BorderSide(color: Colors.blueAccent, width: 1),
+//           borderRadius: BorderRadius.circular(10),
+//         ),
+//       ),
+//       validator: validator,
+//       maxLines: maxLines,
+//     );
+//   }
+// }

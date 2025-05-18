@@ -42,7 +42,7 @@ class RecibeBok extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 1,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 21, 7, 145),

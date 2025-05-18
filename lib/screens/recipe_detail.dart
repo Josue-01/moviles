@@ -15,7 +15,8 @@ class RecipeDetail extends StatefulWidget {
   _RecipeDetailState createState() => _RecipeDetailState();
 }
 
-class _RecipeDetailState extends State<RecipeDetail> {
+class _RecipeDetailState extends State<RecipeDetail>
+    with SingleTickerProviderStateMixin {
   bool isFavorite = false; // variable para saber si es favorito o no
 
   @override
@@ -65,7 +66,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
               child: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,
                 key: ValueKey<bool>(isFavorite),
-                color: Colors.red,
+                color: Colors.red, //color del corazon
+                size: 30, //tamaño del corazon
               ),
             ),
           ),
