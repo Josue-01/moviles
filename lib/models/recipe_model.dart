@@ -50,6 +50,7 @@ class Recipe {
   int id;
   String name;
   String chef;
+  String category;
   String description;
   String image;
   List<String> recipes;
@@ -59,6 +60,7 @@ class Recipe {
     required this.id,
     required this.name,
     required this.chef,
+    required this.category,
     required this.description,
     required this.image,
     required this.recipes,
@@ -70,6 +72,7 @@ class Recipe {
       id: json['id'],
       name: json['name'],
       chef: json['chef'],
+      category: json['category'] ?? '', // Manejo de categoría opcional
       description: json['description'],
       image: json['image'],
       recipes: List<String>.from(json['recipeSteps'] ?? []),
@@ -82,6 +85,7 @@ class Recipe {
       'id': id,
       'name': name,
       'chef': chef,
+      'category': category,
       'description': description,
       'image': image,
       'recipeSteps': recipes,
@@ -90,6 +94,6 @@ class Recipe {
 
   @override
   String toString() {
-    return 'Recipe{id: $id, name: $name, chef: $chef, description: $description, image: $image, recipeSteps: $recipes}';
+    return 'Recipe{id: $id, name: $name, chef: $chef, category: $category, description: $description, image: $image, recipeSteps: $recipes}';
   }
 }

@@ -9,6 +9,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final recipesProvider = Provider.of<RecipesProvider>(context);
         final recipesProvider = Provider.of <RecipesProvider>(context, listen: false);
         recipesProvider.FetchRecipes(); //llamamos a la funcion para que se ejecute al iniciar la app
 
