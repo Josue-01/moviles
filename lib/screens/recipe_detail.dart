@@ -83,8 +83,10 @@ class _RecipeDetailState extends State<RecipeDetail>
             Text("by ${widget.recipesData.chef}"), //nombre de la receta),
             SizedBox(height: 8), //espacio entre los widgets
             Text('Recipes steps'),
-            for (var Step in widget.recipesData.recipeSteps) Text("- $Step"),
+            for (var Step in widget.recipesData.recipes) Text("- $Step"),
+            
           ],
+          
         ),
       ),
     );

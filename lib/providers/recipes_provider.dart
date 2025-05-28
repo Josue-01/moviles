@@ -10,9 +10,9 @@
    List<Recipe> favoriteRecipe = [];
 
     Future<void> FetchRecipes() async{
-     //var carga
+     //var carga`1
      isLoading = true;
-     notifyListeners(); //notifica a los widgets que dependen de este provider que el estado ha cambiado
+    //  notifyListeners(); //notifica a los widgets que dependen de este provider que el estado ha cambiado4
 
      final url =  Uri.parse('http://10.0.2.2:12346/recipes');
    try{
@@ -61,4 +61,6 @@
       notifyListeners(); // notifica a los widgets que dependen de este provider que el estado ha cambiado
     }
   }
+
+
 }

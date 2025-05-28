@@ -1,4 +1,4 @@
-// class Recipe {
+// class Recipe { 
 //   int id;
 //   String name;
 //   String chef;
@@ -6,18 +6,18 @@
 //   String image;
 //    List<String> recipeSteps;
 
-//   //Constructor de la clase receta
+// //   Constructor de la clase receta
 //   Recipe({
 //     required this.id,
 //     required this.name,
 //     required this.chef,
 //     required this.description,
 //     required this.image,
-//   //  required this.recipeSteps,
+//    required this.recipeSteps,
 //   });
 
 
-//   //factory mejor manejo y cambio de nuestra clase
+// //   factory mejor manejo y cambio de nuestra clase
 //   factory Recipe.fromJson(Map<String, dynamic> json) {
 //     return Recipe(
 //       id: json['id'],
@@ -25,10 +25,10 @@
 //       chef: json['chef'],
 //       description: json['description'],
 //       image: json['image'],
-//     // recipeSteps: List<String>.from(json['recipe']),
+//     recipeSteps: List<String>.from(json['recipe']),
 //     );
 //   }
-//   //conversion  a json]
+// //   conversion  a json]
 //   Map<String, dynamic> toJson() {
 //     return {
 //       'id': id,
@@ -36,7 +36,7 @@
 //       'chef': chef,
 //       'description': description,
 //       'image': image,
-//       // 'recipe': recipeSteps,
+//       'recipe': recipeSteps,
 //     };
 //   } 
 
@@ -52,7 +52,7 @@ class Recipe {
   String chef;
   String description;
   String image;
-  List<String> recipeSteps;
+  List<String> recipes;
 
   // Constructor de la clase receta
   Recipe({
@@ -61,7 +61,7 @@ class Recipe {
     required this.chef,
     required this.description,
     required this.image,
-    required this.recipeSteps,
+    required this.recipes,
   });
 
   // Factory para crear una instancia desde un mapa (por ejemplo, de JSON)
@@ -72,7 +72,7 @@ class Recipe {
       chef: json['chef'],
       description: json['description'],
       image: json['image'],
-      recipeSteps: List<String>.from(json['recipeSteps'] ?? []),
+      recipes: List<String>.from(json['recipeSteps'] ?? []),
     );
   }
 
@@ -84,12 +84,12 @@ class Recipe {
       'chef': chef,
       'description': description,
       'image': image,
-      'recipeSteps': recipeSteps,
+      'recipeSteps': recipes,
     };
   }
 
   @override
   String toString() {
-    return 'Recipe{id: $id, name: $name, chef: $chef, description: $description, image: $image, recipeSteps: $recipeSteps}';
+    return 'Recipe{id: $id, name: $name, chef: $chef, description: $description, image: $image, recipeSteps: $recipes}';
   }
 }

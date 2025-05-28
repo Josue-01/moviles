@@ -47,14 +47,33 @@ class RecibeBok extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 21, 7, 145),
           title: Text(
-            'Comidas tipicas de Tiquicia🍽️',
+            'Libro de Recetas🍽️',
             style: TextStyle(color: Colors.white),
           ),
+          actions: [
+          
+              DropdownButton(
+                items: const [
+                  DropdownMenuItem(
+                    child: Text('Sushi'),value: 'Sushi'),
+                  DropdownMenuItem(
+                    child: Text('Hamburguesa'),
+                    value: 'Hamburguesa'),
+                  DropdownMenuItem(
+                    child: Text('Pizza'),
+                    value: 'Pizza'),
+                ], onChanged: (String? value) {  print('Select: $value');},
+                  icon: const Icon(Icons.menu_open_outlined,color: Colors.white), //color de la flecha
+                      menuMaxHeight: 300, // Opcional, altura máxima
+                     itemHeight: 48,     // Opcional, altura por ítem
+                ),
+          ],
           bottom: TabBar(
             indicatorColor: Colors.white,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white,
-            tabs:[
+            tabs:[ 
+
             Tab(icon: Icon(Icons.home), text: 'Home',),
             Tab(icon: Icon(Icons.favorite), text: 'Favoritos',)
             // Tab(icon: Icon(Icons.settings), text: 'Ajustes',)
@@ -66,4 +85,5 @@ class RecibeBok extends StatelessWidget {
     );
   }
 }
+
 
