@@ -84,9 +84,7 @@ class _RecipeDetailState extends State<RecipeDetail>
             SizedBox(height: 8), //espacio entre los widgets
             Text('Recipes steps'),
             for (var Step in widget.recipesData.recipes) Text("- $Step"),
-            
           ],
-          
         ),
       ),
     );

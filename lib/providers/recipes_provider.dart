@@ -14,7 +14,7 @@ class RecipesProvider extends ChangeNotifier {
     isLoading = true;
     //  notifyListeners(); //notifica a los widgets que dependen de este provider que el estado ha cambiado4
 
-    final url = Uri.parse('http://10.0.2.2:12346/recipes');
+    final url = Uri.parse('http://localhost:12346/recipes');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -45,7 +45,7 @@ class RecipesProvider extends ChangeNotifier {
     final isFavorite = favoriteRecipe.contains(recipe);
 
     try {
-      final url = Uri.parse('http://10.0.2.2:12346/favorites');
+      final url = Uri.parse('http://localhost:12346/favorites');
       final response =
           isFavorite
               ? await http.delete(url, body: json.encode({"id": recipe.id}))
@@ -75,16 +75,14 @@ class RecipesProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners(); // notifica a los widgets que dependen de este provider que el estado ha cambiado
 
-    final url = Uri.parse('http:////10.0.2.2:12346/recipes?category=$category');
+    final url = Uri.parse('http://localhost:12346/recipes?category=$category');
 
     try {
-      
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         recipes = List<Recipe>.from(
           data['recipes'].map((recipe) => Recipe.fromJson(recipe)),
-          
         );
       } else {
         print('Error: ${response.statusCode}');
