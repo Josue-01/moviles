@@ -3,82 +3,133 @@ import 'package:provider/provider.dart';
 import 'package:proyect_recetas_comidas/providers/recipes_provider.dart';
 import 'package:proyect_recetas_comidas/screens/recipe_detail.dart';
 
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // final recipesProvider = Provider.of<RecipesProvider>(context);
+//     final recipesProvider = Provider.of<RecipesProvider>(
+//       context,
+//       listen: false,
+//     );
+//     recipesProvider.FetchRecipes(); //llamamos a la funcion para que se ejecute al iniciar la app
+
+//     return Scaffold(
+//       body: Consumer<RecipesProvider>(
+//         builder: (context, provider, child) {
+//           if (provider.isLoading) {
+//             return const Center(
+//               child: CircularProgressIndicator(),
+//             ); //si no carga el dato que apareza un circulo de carga
+//           } else if (provider.recipes.isEmpty) {
+//             //en el caso de que llegue vacio, y preguntamos si esta llegando al snapchot
+//             return const Center(child: Text('No se encontraron recetas'));
+//           } else {
+//             return ListView.builder(
+//               itemCount:
+//                   provider
+//                       .recipes
+//                       .length, //para contar cuantos objetos o recetas tiene dentro del listado
+//               itemBuilder: (context, index) {
+//                 return _RecipesCard(context, provider.recipes[index]);
+//               },
+//             );
+//           }
+//         },
+//       ),
+//       //FloatingActionButton recibira un widget de
+//       floatingActionButton: FloatingActionButton(
+//         backgroundColor: Colors.orange,
+//         child: Icon(Icons.add, color: Colors.white),
+//         //onPressed es para que cuando se presione el boton haga algo
+//         onPressed: () {
+//           _showBottom(context);
+//         },
+//       ), //FloatingActionButton
+//     );
+//   }
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final recipesProvider = Provider.of<RecipesProvider>(context);
     final recipesProvider = Provider.of<RecipesProvider>(
       context,
       listen: false,
     );
-    recipesProvider.FetchRecipes(); //llamamos a la funcion para que se ejecute al iniciar la app
+    recipesProvider.FetchRecipes();
 
     return Scaffold(
-      body: Consumer<RecipesProvider>(
-        builder: (context, provider, child) {
-          if (provider.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            ); //si no carga el dato que apareza un circulo de carga
-          } else if (provider.recipes.isEmpty) {
-            //en el caso de que llegue vacio, y preguntamos si esta llegando al snapchot
-            return const Center(child: Text('No se encontraron recetas'));
-          } else {
-            return ListView.builder(
-              itemCount:
-                  provider
-                      .recipes
-                      .length, //para contar cuantos objetos o recetas tiene dentro del listado
-              itemBuilder: (context, index) {
-                return _RecipesCard(context, provider.recipes[index]);
-              },
-            );
-          }
-        },
+      body: Stack(
+        children: [
+          // Imagen de fondo
+          SizedBox.expand(
+            child: Image.network(
+              'https://t4.ftcdn.net/jpg/02/92/20/37/360_F_292203735_CSsyqyS6A4Z9Czd4Msf7qZEhoxjpzZl1.jpg',
+            fit: BoxFit.cover,
+            ),
+          ),
+
+          // Contenido de recetas
+          Consumer<RecipesProvider>(
+            builder: (context, provider, child) {
+              if (provider.isLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (provider.recipes.isEmpty) {
+                return const Center(
+                  child: Text(
+                    'No se encontraron recetas',
+                    style: TextStyle(color: Colors.white), // Color blanco para que sea visible
+                  ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GridView.builder(
+                    itemCount: provider.recipes.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // 1 receta por fila
+                      crossAxisSpacing: 1,
+                      mainAxisSpacing: 1,
+                      mainAxisExtent: 200,
+                    ),
+                    itemBuilder: (context, index) {
+                      return _RecipeCard(context, provider.recipes[index]);
+                    },
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       ),
-      //FloatingActionButton recibira un widget de
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.orange,
-        child: Icon(Icons.add, color: Colors.white),
-        //onPressed es para que cuando se presione el boton haga algo
+        backgroundColor: Colors.purple,
+        child: const Icon(Icons.add, color: Colors.white),
         onPressed: () {
           _showBottom(context);
         },
-      ), //FloatingActionButton
+      ),
     );
   }
 
-  //bottom +
   Future<void> _showBottom(BuildContext context) {
     return showModalBottomSheet(
       context: context,
-      builder:
-          (context) => Container(
-            width:
-                MediaQuery.of(context)
-                    .size
-                    .width, //esto es para que el contenedor se ajuste al tamaño de la pantalla
-            height: 500,
-            color: Colors.white,
-            //para que se vea el form dentro de la pantalla, c toma el nombre de la clase y lo agregamos dentro del modal
-            child: RecipeForm(),
-          ),
+      builder: (context) => Container(
+        width: MediaQuery.of(context).size.width,
+        height: 500,
+        color: Colors.white,
+        child: RecipeForm(),
+      ),
     );
   }
 
-  // BuildContext esta ayuda a tener la herencia de la aplicacion
-  //esto es una tarjeta
-  Widget _RecipesCard(
-    BuildContext context,
-    //para que el cart reciba las recetas
-    dynamic recipe,
-  ) {
+  Widget _RecipeCard(BuildContext context, dynamic recipe) {
     return GestureDetector(
-      //SE AGREGGO EL WIDGET PARA AGREGAR EL ONTAP EL CUAL VA A REDIRIGIR A LA PANTALLA DE DETALLE
       onTap: () {
-        //Navigator.push abre una nueva pantalla
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -86,52 +137,49 @@ class HomeScreen extends StatelessWidget {
           ),
         );
       },
-      child: Padding(
-        //el pading con el all aplica en todos lados, pero cuando se quiere aplicar en un solo lado se usa el only()
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: 125,
-          child: Card(
-            child: Row(
-              children: <Widget>[
-                Container(
-                  height: 125,
-                  width: 100,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    //network es para traer una imagen de internet
-                    //box fit es para que la imagen se ajuste al contenedor
-                    child: Image.network(recipe.image, fit: BoxFit.cover),
-                  ),
-                ),
-                SizedBox(width: 26),
-                Column(
-                  //organizarlas para que lo que esta en el widget se vea en el centro
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  //organizarlas para que lo que esta horizontal desde el inicio
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      recipe.name,
-                      style: TextStyle(fontSize: 20, fontFamily: 'Quicksand'),
-                    ),
-                    SizedBox(height: 4),
-                    //aqui la linea se pone en el centro de los dos
-                    Container(height: 2, width: 75, color: Colors.orange),
-                    Text(
-                      'By ${recipe.chef}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Quicksand',
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                  ],
-                ),
-              ],
+      child: Card(
+        color: const Color.fromARGB(255, 236, 235, 236),//color de la tarjeta
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        elevation: 4,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.network(
+                recipe.image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 140,
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 1),
+              child: Column(
+                children: [
+                  Text(
+                    recipe.name,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.purple,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'By ${recipe.chef}',
+                    style: const TextStyle(
+                      color: Colors.purple,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -174,7 +222,7 @@ class RecipeForm extends StatelessWidget {
           children: [
             Text(
               '🥗Agrega una nueva receta🥗',
-              style: TextStyle(color: Colors.blueAccent, fontSize: 24),
+              style: TextStyle(color: const Color.fromARGB(255, 207, 154, 6), fontSize: 24),
             ),
             //height porque estamos usando columnas
             //*************************************Nombre de la receta****************************************************** */
@@ -244,7 +292,7 @@ class RecipeForm extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor:const Color.fromARGB(255, 94, 7, 145),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
