@@ -145,7 +145,7 @@ class _RecibeBokState extends State<RecibeBok> {
           child: AppBar(
             backgroundColor: const Color.fromARGB(255, 94, 7, 145),
             title: const Text(
-              ' ecetas🍽️',
+              'Recetas🍽️',
               style: TextStyle(color: Colors.white),
             ),
             actions: [
